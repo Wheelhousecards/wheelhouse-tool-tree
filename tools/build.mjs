@@ -1,7 +1,8 @@
-// Encrypts the tool list into index.html so neither the codes nor the links appear in the page source.
-//   Build:   SITE_CODE=xxxx MANAGER_PIN=xxxx node tools/build.mjs            (reads tools/links.json)
-//   Recover: SITE_CODE=xxxx MANAGER_PIN=xxxx node tools/build.mjs decrypt    (writes tools/links.json from index.html)
-// tools/links.json holds the plain links and is git-ignored. Never commit it or the codes.
+// Writes the tool list into index.html. In-progress ("wip") links are encrypted with the manager PIN,
+// so neither the PIN nor those links appear in the page source.
+//   Build:   MANAGER_PIN=xxxx node tools/build.mjs            (reads tools/links.json)
+//   Recover: MANAGER_PIN=xxxx node tools/build.mjs decrypt    (writes tools/links.json from index.html)
+// tools/links.json is git-ignored. Never commit it or the PIN.
 import { readFileSync, writeFileSync } from "node:fs";
 const { subtle } = globalThis.crypto;
 const ITER = 600000, enc = new TextEncoder(), dec = new TextDecoder();
@@ -19,18 +20,18 @@ async function open(box, secret) {
   const pt = await subtle.decrypt({ name: "AES-GCM", iv: unb64(box.i) }, await key(secret, unb64(box.s)), unb64(box.c));
   return JSON.parse(dec.decode(pt));
 }
-const { SITE_CODE, MANAGER_PIN } = process.env;
-if (!SITE_CODE || !MANAGER_PIN) { console.error("Set SITE_CODE and MANAGER_PIN"); process.exit(1); }
+const { MANAGER_PIN } = process.env;
+if (!MANAGER_PIN) { console.error("Set MANAGER_PIN"); process.exit(1); }
 const html = readFileSync("index.html", "utf8"), re = /\/\*VAULT\*\/[\s\S]*?\/\*END\*\//;
 if (process.argv[2] === "decrypt") {
   const vault = JSON.parse(html.match(re)[0].slice(9, -7));
-  const tiles = await open(vault.team, SITE_CODE), wip = await open(vault.mgr, SITE_CODE + ":" + MANAGER_PIN);
+  const tiles = vault.tiles, wip = await open(vault.mgr, MANAGER_PIN);
   writeFileSync("tools/links.json", JSON.stringify(tiles.map((t, n) => (t.url ? t : { ...t, url: wip[n] })), null, 2) + "\n");
   console.log("Wrote tools/links.json");
 } else {
   const links = JSON.parse(readFileSync("tools/links.json", "utf8")), wip = {};
   const tiles = links.map((l, n) => { if (l.status === "wip") { wip[n] = l.url; const { url, ...rest } = l; return rest; } return l; });
-  const vault = { team: await seal(tiles, SITE_CODE), mgr: await seal(wip, SITE_CODE + ":" + MANAGER_PIN) };
+  const vault = { tiles, mgr: await seal(wip, MANAGER_PIN) };
   writeFileSync("index.html", html.replace(re, "/*VAULT*/" + JSON.stringify(vault) + "/*END*/"));
   console.log("Encrypted", links.length, "tools into index.html");
 }
