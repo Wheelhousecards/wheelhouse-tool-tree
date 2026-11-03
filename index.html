@@ -11,7 +11,7 @@
 /* =========================================================
    Wheelhouse brand colors (from wheelhousecards.com)
    Blue  #4472C3  ·  Gold  #D79431  ·  Black  ·  White
-   To change tools or the PIN, edit the <script> at the bottom.
+   Tools and codes are encrypted; see tools/build.mjs.
    ========================================================= */
 :root{
   --blue:#4472C3; --blue-dark:#355ca3; --blue-soft:#e9effa;
@@ -149,33 +149,10 @@ body.gated .gate{display:block}
 </div>
 
 <script>
-/* ===================== EDIT BELOW ===================== */
+/* The tool list and both codes are encrypted below. To change tools, ask Claude
+   or see tools/build.mjs in this repo. Don't edit the VAULT line by hand. */
+const VAULT = /*VAULT*/{"team":{"s":"zPkHnrr2ny/ROJmsogW94g==","i":"CKxgheSIR9iTuPiB","c":"iUeS5bR8Qdb26TDcMGhL1Dc9rZ6qetSpdtf6dWLWDlc28EGvbFNtYKYBVu1xt725QETFhnv2hIw6vPghewKGWP8duurqvMSiKPZ4YikMIrH7ewIRub5Kz0oR40EtSpmGRk8a3QlF8u3Qdtg7UaEtvM2NnwNIXECVu1s+a0xCDMVL7FuFdRAImE2oM31iL2LvdgG4PnUCW4+J8piCVFv5SuIRB6ZbXUK3xwSeFqCRYZisyBDQZfJmfGtNLWjZJvmWB7W5ZVOXOvZ7utOJIZYv1Xco7HC8xVEKL2/BMMo5h7bzU7L7k5RobvWwg4gMxkyL/4BsaVBtygTTurLcqXsT8nZzTqEzLzs910VoNxDEf8QeLJlAfd/pJFfWZCGTIpuHeM4v2/Xv36/VYrKwD7JiiCO1/afRP2RubQtbAm0rvG8IdoPhsaPH5YJr24uKFR6issuSYa+ShACEn8bIjr5B8gepto8hU8Rss3NheuHaDkr150agtOj/MrOisJFIpWE/4oCvf7jRsTspqFkisTg5z/8ni5xbtuTQMmRLWIKhDye6eQvHoVU81e3HP5qsD8i1BcKgKJR3Hzc4Wg/Dl5TUjhKQtSox5YAKc3YPJuRtMTNhW80blxn1sUXtu4Kfy85gHIDxOWGdBEk/SJeL2dGONCG2hJaDl0Ya+0JSu6OLKZYZds54g/jakoVkj3g7agzb97+urgziIX8cUo4JIeeL15h9ov6J30320hNjS1WVO7jaAq5l3r4RXQ6LB9axomuDNmdKEyzQAzs/KJvUq4XvN3PghZt3ar6GsbWlZ6FT0izdbo/ZYmbEchQnnH0bDz2t7LCsPXa4hiVUB6A0zqdVXwLFaM6eXtvy3UkHrU6+Z162tmMbj8b7XbpnsFVHaAWn7jiV8PS/flQ5qozgu6jaG6C5PmN3rbItIYwGEegOIj54D9e25wBaviPsPr5Htto/ZtduajPv35cnSsFqFNPgS/0YaTtdhQz3+mnN6f3VS4bSfdo2yPltpW06Pq/F0e42dZB7kJHxm7UkKH+rv5ZoCc5QwQUdHl+v1Hp8CxcWZuqV7InRd3gMtvAPftYsa4kN8Huk7Gj+hGaqLs5OJa0xkjI="},"mgr":{"s":"zjiljLH6YMO840VCNryDdQ==","i":"Oey/ssPrf33ivwFG","c":"S7PdAcuPJuxpaRTgY5baqyrsc19dxcqCbXgbeJiP6pUXB+5xBt/lWORT58xRHcSXRhYYlTTAe6xUk48ByCNrD0IT3jpA1jLCWUA9+gh88+cL6EuriEN+FV/Tqz5sLj7Wojz9Bq5Jc2Yom7/rMJzWaon5YrH63Q=="}}/*END*/;
 
-// Your unlock code.
-const MANAGER_PIN = "1175";
-
-// Team code everyone enters to see the page.
-const SITE_CODE = "0106";
-
-// status: "live" = everyone can open it
-//         "wip"  = shows Under Construction unless unlocked with the PIN
-// To launch a tool, change its status from "wip" to "live".
-const LINKS = [
-  { name: "Wheel Wax",             desc: "Wax inventory & aging",            icon: "box",      status: "live",
-    url: "https://wheelhouse-wax-aging.vercel.app/#inventory" },
-  { name: "Breaks Scheduling",     desc: "Book and manage break rooms",      icon: "video",    status: "live",
-    url: "https://wheelhousejt.github.io/wheelhouse-breaks-schedule/" },
-  { name: "In-Store Scheduling",   desc: "Staff shifts by week & store",     icon: "calendar", status: "live",
-    url: "https://wheelhousejt.github.io/gusto-schedule/" },
-  { name: "Hiring Tracker",        desc: "Candidates from interview to hired", icon: "users",  status: "live",
-    url: "https://wheelhousecards.github.io/wheelhouse-hiring/" },
-  { name: "Inquiry Board",         desc: "Customer calls, texts, emails & DM's", icon: "phone",    status: "wip",
-    url: "https://wheelhousejt.github.io/phone-board/" },
-  { name: "Consignment Tracking",  desc: "Track consigned items",            icon: "tag",      status: "wip",
-    url: "https://wheelhousecards.github.io/staff.html" },
-];
-
-/* ================= NO NEED TO EDIT BELOW ================= */
 const ICONS = {
   box:'<path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/>',
   video:'<rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/>',
@@ -185,30 +162,46 @@ const ICONS = {
   users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>',
   link:'<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>'
 };
-const KEY = "wh_tools_unlocked";
-const store = {
-  get(){ try { return localStorage.getItem(KEY) === "1"; } catch(e){ return false; } },
-  set(v){ try { v ? localStorage.setItem(KEY,"1") : localStorage.removeItem(KEY); } catch(e){} }
-};
-let unlocked = store.get();
 
-const list = document.getElementById("list");
-const ucModal = document.getElementById("ucModal");
-const pinModal = document.getElementById("pinModal");
-const pinInput = document.getElementById("pinInput");
-const pinErr = document.getElementById("pinErr");
-const mgrBtn = document.getElementById("mgrBtn");
+/* ---------- decryption ---------- */
+const subtle = window.crypto && window.crypto.subtle;
+const enc = new TextEncoder(), dec = new TextDecoder();
+const unb64 = (s) => Uint8Array.from(atob(s), (ch) => ch.charCodeAt(0));
+const toB64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
+async function deriveRaw(secret, salt){
+  const base = await subtle.importKey("raw", enc.encode(secret), "PBKDF2", false, ["deriveBits"]);
+  return subtle.deriveBits({ name: "PBKDF2", salt, iterations: 600000, hash: "SHA-256" }, base, 256);
+}
+async function openWithRaw(box, raw){
+  const k = await subtle.importKey("raw", raw, "AES-GCM", false, ["decrypt"]);
+  const pt = await subtle.decrypt({ name: "AES-GCM", iv: unb64(box.i) }, k, unb64(box.c));
+  return JSON.parse(dec.decode(pt));
+}
+// Each device keeps the derived key (not the code) so people only type it once.
+const mem = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch(e){} }
+};
+const TEAM_KEY = "wh_tt_team", MGR_KEY = "wh_tt_mgr", TEAM_CODE = "wh_tt_tc";
+let tiles = null, wipUrls = null;
+
+/* ---------- page ---------- */
+const $ = (id) => document.getElementById(id);
+const list = $("list"), ucModal = $("ucModal"), pinModal = $("pinModal");
+const pinInput = $("pinInput"), pinErr = $("pinErr"), mgrBtn = $("mgrBtn");
+const gateInput = $("gateInput"), gateErr = $("gateErr");
 
 function render(){
+  const unlocked = !!wipUrls;
   document.body.classList.toggle("unlocked", unlocked);
   mgrBtn.textContent = unlocked ? "Lock manager access" : "Manager access";
   list.innerHTML = "";
-  LINKS.forEach(l => {
+  (tiles || []).forEach((l, n) => {
     const wip = l.status === "wip";
-    const open = !wip || unlocked;
-    const el = document.createElement(open ? "a" : "button");
+    const url = wip ? (wipUrls && wipUrls[n]) : l.url;
+    const el = document.createElement(url ? "a" : "button");
     el.className = "tile" + (wip ? " wip" : "");
-    if (open) { el.href = l.url; el.target = "_blank"; el.rel = "noopener"; }
+    if (url) { el.href = url; el.target = "_blank"; el.rel = "noopener"; }
     else { el.type = "button"; el.addEventListener("click", () => showUC(l.name)); }
     el.innerHTML =
       `<div class="icon"><svg viewBox="0 0 24 24">${ICONS[l.icon] || ICONS.link}</svg></div>
@@ -222,41 +215,64 @@ function render(){
 
 function openModal(m){ m.classList.add("open"); }
 function closeModals(){ [ucModal,pinModal].forEach(m => m.classList.remove("open")); pinErr.textContent=""; pinInput.value=""; }
-function showUC(name){ document.getElementById("ucName").textContent = name; openModal(ucModal); }
+function showUC(name){ $("ucName").textContent = name; openModal(ucModal); }
 function showPin(){ closeModals(); openModal(pinModal); setTimeout(() => pinInput.focus(), 50); }
 
-function tryPin(){
-  if (pinInput.value.trim() === MANAGER_PIN) { unlocked = true; store.set(true); closeModals(); render(); }
-  else { pinErr.textContent = "Wrong PIN"; pinInput.select(); }
+let busy = false;
+async function tryGate(){
+  const code = gateInput.value.trim();
+  if (busy || !code) return;
+  if (!subtle) { gateErr.textContent = "This browser can't open the Tools Tree. Try Chrome or Safari."; return; }
+  busy = true; gateErr.textContent = "Checking…";
+  try {
+    const raw = await deriveRaw(code, unb64(VAULT.team.s));
+    tiles = await openWithRaw(VAULT.team, raw);
+    mem.set(TEAM_KEY, toB64(raw)); mem.set(TEAM_CODE, code);
+    gateErr.textContent = ""; document.body.classList.remove("gated"); render();
+  } catch(e) {
+    busy = false;
+    if (gateInput.value.trim() !== code && gateInput.value.length === 4) return tryGate();
+    gateErr.textContent = "Wrong code"; gateInput.select();
+  }
+  busy = false;
+}
+async function tryPin(){
+  const pin = pinInput.value.trim(), code = mem.get(TEAM_CODE);
+  if (busy || !pin) return;
+  busy = true; pinErr.textContent = "Checking…";
+  try {
+    const raw = await deriveRaw(code + ":" + pin, unb64(VAULT.mgr.s));
+    wipUrls = await openWithRaw(VAULT.mgr, raw);
+    mem.set(MGR_KEY, toB64(raw)); closeModals(); render();
+  } catch(e) { pinErr.textContent = "Wrong PIN"; pinInput.select(); }
+  busy = false;
 }
 
 mgrBtn.addEventListener("click", () => {
-  if (unlocked) { unlocked = false; store.set(false); render(); } else showPin();
+  if (wipUrls) { wipUrls = null; mem.set(MGR_KEY, null); render(); } else showPin();
 });
-document.getElementById("ucToPin").addEventListener("click", showPin);
-document.getElementById("pinGo").addEventListener("click", tryPin);
+$("ucToPin").addEventListener("click", showPin);
+$("pinGo").addEventListener("click", tryPin);
 pinInput.addEventListener("keydown", e => { if (e.key === "Enter") tryPin(); });
+$("gateGo").addEventListener("click", tryGate);
+gateInput.addEventListener("keydown", e => { if (e.key === "Enter") tryGate(); });
+gateInput.addEventListener("input", () => { if (gateInput.value.length === 4) tryGate(); });
 document.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", closeModals));
 [ucModal,pinModal].forEach(m => m.addEventListener("click", e => { if (e.target === m) closeModals(); }));
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeModals(); });
 
-// Entry code gate (remembered on this device)
-const GATE_KEY = "wh_tools_entered";
-const gateInput = document.getElementById("gateInput");
-const gateErr = document.getElementById("gateErr");
-function isEntered(){ try { return localStorage.getItem(GATE_KEY) === SITE_CODE; } catch(e){ return false; } }
-function tryGate(){
-  if (gateInput.value.trim() === SITE_CODE) {
-    try { localStorage.setItem(GATE_KEY, SITE_CODE); } catch(e){}
-    document.body.classList.remove("gated"); gateErr.textContent = "";
-  } else { gateErr.textContent = "Wrong code"; gateInput.select(); }
-}
-document.getElementById("gateGo").addEventListener("click", tryGate);
-gateInput.addEventListener("keydown", e => { if (e.key === "Enter") tryGate(); });
-gateInput.addEventListener("input", () => { if (gateInput.value.length === 4) tryGate(); });
-if (isEntered()) document.body.classList.remove("gated"); else setTimeout(() => gateInput.focus(), 50);
-
-render();
+// Returning device: reuse the saved keys. If the codes have changed, ask again.
+(async () => {
+  const t = mem.get(TEAM_KEY);
+  if (t) {
+    try { tiles = await openWithRaw(VAULT.team, unb64(t)); document.body.classList.remove("gated"); }
+    catch(e) { mem.set(TEAM_KEY, null); mem.set(TEAM_CODE, null); mem.set(MGR_KEY, null); }
+  }
+  const m = mem.get(MGR_KEY);
+  if (tiles && m) { try { wipUrls = await openWithRaw(VAULT.mgr, unb64(m)); } catch(e) { mem.set(MGR_KEY, null); } }
+  if (!tiles) setTimeout(() => gateInput.focus(), 50);
+  render();
+})();
 </script>
 </body>
 </html>
