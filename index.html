@@ -3,91 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wheelhouse Tools</title>
+<title>Wheelhouse Tools Tree</title>
+<link rel="icon" href="https://wheelhousecards.com/wp-content/uploads/2026/09/cropped-WEBICON-270x270.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
-   EDIT HERE — the only two things you should need to change
-   (they're in the <script> at the bottom of this file):
-   1. MANAGER_PIN  – your unlock code
-   2. LINKS        – the list of tools
+   Wheelhouse brand colors (from wheelhousecards.com)
+   Blue  #4472C3  ·  Gold  #D79431  ·  Black  ·  White
+   To change tools or the PIN, edit the <script> at the bottom.
    ========================================================= */
 :root{
-  --bg:#0d1117; --panel:#161b22; --panel-hover:#1c2330; --border:#2a3240;
-  --text:#e8ecf2; --muted:#8b96a8; --accent:#f2b134; --accent-ink:#1a1300;
-  --live:#3fb950; --wip:#f2b134; --stripe:#2a2410;
+  --blue:#4472C3; --blue-dark:#355ca3; --blue-soft:#e9effa;
+  --gold:#D79431; --gold-soft:#fbf1e2; --gold-ink:#8a5a12;
+  --black:#000; --text:#1a1a1a; --muted:#6b7280;
+  --bg:#F3F3F3; --panel:#fff; --border:#e2e2e2;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;
-  min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 16px 32px}
-.wrap{width:100%;max-width:520px}
-header{text-align:center;margin-bottom:32px}
-.logo{width:64px;height:64px;border-radius:50%;margin:0 auto 14px;background:var(--accent);
-  display:grid;place-items:center;color:var(--accent-ink);font-family:"Barlow Condensed",sans-serif;
-  font-weight:700;font-size:30px;letter-spacing:.5px}
-h1{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:34px;letter-spacing:1.5px;
-  text-transform:uppercase;margin:0}
-.sub{color:var(--muted);font-size:14px;margin-top:4px}
-.mgr-banner{display:none;margin:0 0 16px;padding:10px 14px;border-radius:10px;font-size:13px;
-  background:var(--stripe);border:1px solid #4a3b12;color:var(--accent);text-align:center}
+body{background:var(--bg);color:var(--text);font-family:Barlow,system-ui,sans-serif;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center}
+.topbar{width:100%;background:#fff;border-bottom:4px solid var(--blue);display:flex;justify-content:center;padding:22px 16px}
+.topbar img{height:56px;width:auto;display:block}
+.topbar .fallback{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:34px;letter-spacing:1px;
+  border:3px solid #000;border-radius:10px;padding:2px 14px;display:none}
+.wrap{width:100%;max-width:540px;padding:32px 16px 32px}
+header{text-align:center;margin-bottom:26px}
+h1{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:36px;letter-spacing:1.5px;
+  text-transform:uppercase;margin:0;color:var(--black)}
+h1 span{color:var(--gold)}
+.sub{color:var(--muted);font-size:15px;margin-top:2px}
+.mgr-banner{display:none;margin:0 0 16px;padding:10px 14px;border-radius:10px;font-size:14px;font-weight:500;
+  background:var(--gold-soft);border:1px solid #efd3a6;color:var(--gold-ink);text-align:center}
 body.unlocked .mgr-banner{display:block}
 .list{display:flex;flex-direction:column;gap:12px}
-.tile{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;
-  background:var(--panel);border:1px solid var(--border);color:inherit;text-decoration:none;
-  cursor:pointer;transition:background .15s,transform .15s,border-color .15s;width:100%;
-  font:inherit;text-align:left}
-.tile:hover{background:var(--panel-hover);border-color:#3a4558;transform:translateY(-1px)}
-.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.icon{flex:none;width:42px;height:42px;border-radius:10px;background:#212937;display:grid;place-items:center}
-.icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tile{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:12px;
+  background:var(--panel);border:1px solid var(--border);border-left:5px solid var(--blue);color:inherit;text-decoration:none;
+  cursor:pointer;transition:box-shadow .15s,transform .15s,border-color .15s;width:100%;
+  font:inherit;text-align:left;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.tile:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(68,114,195,.15);border-color:var(--blue)}
+.tile:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.icon{flex:none;width:44px;height:44px;border-radius:10px;background:var(--blue);display:grid;place-items:center}
+.icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .body{flex:1;min-width:0}
-.name{font-weight:600;font-size:16px}
-.desc{color:var(--muted);font-size:13px;margin-top:2px}
-.badge{flex:none;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;
-  padding:4px 8px;border-radius:999px}
-.badge.live{display:none}
-.badge.wip{background:var(--stripe);color:var(--wip);border:1px solid #4a3b12}
-.tile.wip{background:repeating-linear-gradient(135deg,var(--panel) 0 14px,#191c1f 14px 28px)}
-.tile.wip .icon svg{stroke:var(--muted)}
-body.unlocked .tile.wip .icon svg{stroke:var(--accent)}
-footer{margin-top:36px;text-align:center;color:var(--muted);font-size:12px}
+.name{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:21px;letter-spacing:.5px;text-transform:uppercase;line-height:1.1}
+.desc{color:var(--muted);font-size:14px;margin-top:2px}
+.arrow{flex:none;color:var(--blue);font-size:20px;font-weight:600}
+.badge{flex:none;font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;background:var(--gold);color:#fff}
+.tile.wip{border-left-color:var(--gold);
+  background:repeating-linear-gradient(135deg,#fff 0 14px,#fbf6ee 14px 28px)}
+.tile.wip .icon{background:#c9ced6}
+body.unlocked .tile.wip .icon{background:var(--gold)}
+.tile.wip:hover{border-color:var(--gold);box-shadow:0 6px 16px rgba(215,148,49,.18)}
+footer{margin-top:36px;text-align:center;color:var(--muted);font-size:13px}
 footer button{background:none;border:none;color:var(--muted);font:inherit;cursor:pointer;
   text-decoration:underline;text-underline-offset:3px;padding:4px}
-footer button:hover{color:var(--text)}
-/* modal */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;
+footer button:hover{color:var(--blue)}
+/* modals */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;
   justify-content:center;padding:16px;z-index:10}
 .overlay.open{display:flex}
-.modal{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:28px 24px;
-  width:100%;max-width:380px;text-align:center}
+.modal{background:#fff;border-radius:16px;padding:28px 24px;width:100%;max-width:380px;text-align:center;
+  border-top:6px solid var(--gold);box-shadow:0 20px 50px rgba(0,0,0,.25)}
 .cone{font-size:40px;line-height:1;margin-bottom:10px}
-.modal h2{font-family:"Barlow Condensed",sans-serif;font-size:26px;letter-spacing:1px;
-  text-transform:uppercase;margin:0 0 6px}
-.modal p{color:var(--muted);font-size:14px;margin:0 0 18px;line-height:1.5}
+.modal h2{font-family:"Barlow Condensed",sans-serif;font-size:28px;letter-spacing:1px;
+  text-transform:uppercase;margin:0 0 6px;color:var(--black)}
+.modal p{color:var(--muted);font-size:15px;margin:0 0 18px;line-height:1.5}
 .modal input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);
-  background:var(--bg);color:var(--text);font:inherit;font-size:18px;text-align:center;letter-spacing:6px}
-.modal input:focus{outline:2px solid var(--accent);border-color:transparent}
-.err{color:#f85149;font-size:13px;min-height:18px;margin:8px 0 4px}
+  background:var(--bg);color:var(--text);font:inherit;font-size:20px;text-align:center;letter-spacing:8px}
+.modal input:focus{outline:2px solid var(--blue);border-color:transparent}
+.err{color:#d03a2f;font-size:14px;min-height:18px;margin:8px 0 4px}
 .row{display:flex;gap:10px;margin-top:8px}
-.btn{flex:1;padding:11px;border-radius:10px;border:1px solid var(--border);background:transparent;
-  color:var(--text);font:inherit;font-weight:600;cursor:pointer}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.link-btn{background:none;border:none;color:var(--muted);font:inherit;font-size:13px;cursor:pointer;
+.btn{flex:1;padding:12px;border-radius:8px;border:1px solid var(--border);background:#fff;
+  color:var(--text);font-family:"Barlow Condensed",sans-serif;font-size:17px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--blue-dark)}
+.link-btn{background:none;border:none;color:var(--muted);font:inherit;font-size:14px;cursor:pointer;
   text-decoration:underline;text-underline-offset:3px;margin-top:14px}
-@media (max-width:420px){ h1{font-size:28px} .tile{padding:14px} }
+@media (max-width:420px){ h1{font-size:30px} .tile{padding:14px} .topbar img{height:46px} .name{font-size:19px} }
 </style>
 </head>
 <body>
+<div class="topbar">
+  <img src="https://wheelhousecards.com/wp-content/uploads/2023/11/unnamed-3-removebg-preview.png" alt="Wheelhouse"
+       onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+  <div class="fallback">WHEELHOUSE</div>
+</div>
+
 <div class="wrap">
   <header>
-    <div class="logo">W</div>
-    <h1>Wheelhouse Tools</h1>
+    <h1>Wheelhouse <span>Tools Tree</span></h1>
     <div class="sub">Everything the team uses, in one place</div>
   </header>
 
-  <div class="mgr-banner">Manager view — in-progress tools are unlocked on this device</div>
+  <div class="mgr-banner">Manager view: in-progress tools are unlocked on this device</div>
   <nav class="list" id="list"></nav>
 
   <footer>
@@ -123,7 +133,7 @@ footer button:hover{color:var(--text)}
 <script>
 /* ===================== EDIT BELOW ===================== */
 
-// Your unlock code. Change this before publishing.
+// Your unlock code.
 const MANAGER_PIN = "1175";
 
 // status: "live" = everyone can open it
@@ -179,7 +189,7 @@ function render(){
     el.innerHTML =
       `<div class="icon"><svg viewBox="0 0 24 24">${ICONS[l.icon] || ICONS.link}</svg></div>
        <div class="body"><div class="name"></div><div class="desc"></div></div>
-       <span class="badge ${wip ? "wip" : "live"}">${wip ? (unlocked ? "In progress" : "Coming soon") : ""}</span>`;
+       ${wip ? `<span class="badge">${unlocked ? "In progress" : "Coming soon"}</span>` : `<span class="arrow" aria-hidden="true">→</span>`}`;
     el.querySelector(".name").textContent = l.name;
     el.querySelector(".desc").textContent = l.desc || "";
     list.appendChild(el);
